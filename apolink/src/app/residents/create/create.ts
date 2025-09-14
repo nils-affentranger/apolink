@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { RESIDENTS, Resident } from '../../shared/data';
 
@@ -32,19 +32,19 @@ export class Create {
     zimmer: '',
   });
 
+  submitted = false;
+
   constructor(private router: Router) {}
 
-  // Helper for template to update a single field without arrow function expressions in the template
+  // Helper for template to update a single field
   update<K extends keyof CreateModel>(key: K, value: CreateModel[K]) {
     this.model.update((m) => ({ ...m, [key]: value }));
   }
 
-  get canSave() {
-    const m = this.model();
-    return !!m.vorname && !!m.nachname && !!m.zimmer; // minimal required
-  }
+  save(form: NgForm) {
+    this.submitted = true;
+    if (form.invalid) return;
 
-  save() {
     const m = this.model();
     const nextId = (RESIDENTS.at(-1)?.id ?? 0) + 1;
     const fullName = `${m.vorname} ${m.nachname}`.trim();

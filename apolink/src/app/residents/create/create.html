@@ -2,92 +2,127 @@
   <h1>Bewohner anlegen</h1>
 
   <div class="section-box">
-    <form (ngSubmit)="save()" #f="ngForm" class="create-form">
+    <form (ngSubmit)="save(f)" #f="ngForm" class="create-form" novalidate>
       <div class="form-grid">
         <!-- Anrede -->
         <div class="form-field">
           <label for="anrede">Anrede</label>
-          <select
-            id="anrede"
-            name="anrede"
-            [ngModel]="model().anrede"
-            (ngModelChange)="update('anrede', $event)"
-          >
-            @for (opt of anredeOptions; track opt) {
-            <option [value]="opt">{{ opt }}</option>
-            }
-          </select>
+          <div class="control-row">
+            <small class="error" [class.show]="submitted && anrede.invalid">Pflichtfeld</small>
+            <select
+              id="anrede"
+              name="anrede"
+              required
+              [ngModel]="model().anrede"
+              (ngModelChange)="update('anrede', $event)"
+              #anrede="ngModel"
+              [class.invalid]="submitted && anrede.invalid"
+            >
+              @for (opt of anredeOptions; track opt) {
+              <option [value]="opt">{{ opt }}</option>
+              }
+            </select>
+          </div>
         </div>
 
         <!-- Vorname -->
         <div class="form-field">
           <label for="vorname">Vorname</label>
-          <input
-            id="vorname"
-            name="vorname"
-            type="text"
-            required
-            [ngModel]="model().vorname"
-            (ngModelChange)="update('vorname', $event)"
-          />
+          <div class="control-row">
+            <small class="error" [class.show]="submitted && vorname.invalid">Pflichtfeld</small>
+            <input
+              id="vorname"
+              name="vorname"
+              type="text"
+              required
+              [ngModel]="model().vorname"
+              (ngModelChange)="update('vorname', $event)"
+              #vorname="ngModel"
+              [class.invalid]="submitted && vorname.invalid"
+            />
+          </div>
         </div>
 
         <!-- Nachname -->
         <div class="form-field">
           <label for="nachname">Nachname</label>
-          <input
-            id="nachname"
-            name="nachname"
-            type="text"
-            required
-            [ngModel]="model().nachname"
-            (ngModelChange)="update('nachname', $event)"
-          />
+          <div class="control-row">
+            <small class="error" [class.show]="submitted && nachname.invalid">Pflichtfeld</small>
+            <input
+              id="nachname"
+              name="nachname"
+              type="text"
+              required
+              [ngModel]="model().nachname"
+              (ngModelChange)="update('nachname', $event)"
+              #nachname="ngModel"
+              [class.invalid]="submitted && nachname.invalid"
+            />
+          </div>
         </div>
 
         <!-- Geburtsdatum -->
-        <div class="form-field span-all">
+        <div class="form-field">
           <label for="geburtsdatum">Geburtsdatum</label>
-          <input
-            id="geburtsdatum"
-            name="geburtsdatum"
-            type="date"
-            [ngModel]="model().geburtsdatum"
-            (ngModelChange)="update('geburtsdatum', $event)"
-          />
+          <div class="control-row">
+            <small class="error" [class.show]="submitted && geburtsdatum.invalid"
+              >Pflichtfeld</small
+            >
+            <input
+              id="geburtsdatum"
+              name="geburtsdatum"
+              type="date"
+              required
+              [ngModel]="model().geburtsdatum"
+              (ngModelChange)="update('geburtsdatum', $event)"
+              #geburtsdatum="ngModel"
+              [class.invalid]="submitted && geburtsdatum.invalid"
+            />
+          </div>
         </div>
 
         <!-- AHV-Nummer -->
-        <div class="form-field span-all">
+        <div class="form-field">
           <label for="ahvNummer">AHV-Nummer</label>
-          <input
-            id="ahvNummer"
-            name="ahvNummer"
-            type="text"
-            inputmode="numeric"
-            placeholder="756.1234.5678.97"
-            [ngModel]="model().ahvNummer"
-            (ngModelChange)="update('ahvNummer', $event)"
-          />
+          <div class="control-row">
+            <small class="error" [class.show]="submitted && ahvNummer.invalid">Pflichtfeld</small>
+            <input
+              id="ahvNummer"
+              name="ahvNummer"
+              type="text"
+              required
+              inputmode="numeric"
+              placeholder="756.1234.5678.97"
+              [ngModel]="model().ahvNummer"
+              (ngModelChange)="update('ahvNummer', $event)"
+              #ahvNummer="ngModel"
+              [class.invalid]="submitted && ahvNummer.invalid"
+            />
+          </div>
         </div>
 
         <!-- Zimmer -->
-        <div class="form-field span-all">
+        <div class="form-field">
           <label for="zimmer">Zimmer</label>
-          <input
-            id="zimmer"
-            name="zimmer"
-            type="text"
-            required
-            [ngModel]="model().zimmer"
-            (ngModelChange)="update('zimmer', $event)"
-          />
+          <div class="control-row">
+            <small class="error" [class.show]="submitted && zimmer.invalid">Pflichtfeld</small>
+            <input
+              id="zimmer"
+              name="zimmer"
+              type="text"
+              required
+              [ngModel]="model().zimmer"
+              (ngModelChange)="update('zimmer', $event)"
+              #zimmer="ngModel"
+              [class.invalid]="submitted && zimmer.invalid"
+            />
+          </div>
         </div>
       </div>
 
       <div class="form-actions">
         <a routerLink="/bewohner" class="btn-secondary">Abbrechen</a>
-        <button class="btn-primary" type="submit" [disabled]="!canSave">Speichern</button>
+        <button class="btn-primary" type="submit">Speichern</button>
       </div>
     </form>
   </div>
