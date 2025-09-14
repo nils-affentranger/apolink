@@ -1,0 +1,33 @@
+.section-box {
+  background-color: #32373d;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px; /* Increased gap for better spacing */
+  padding: 12px;
+  justify-content: center; /* Center the items horizontally */
+}
+
+.quick-access-item {
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 8px 16px; /* Increased padding for better touch targets */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  justify-content: center; /* Center content within each item */
+  text-decoration: none;
+  font-size: 22px;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.order-button {
+  background-color: #1d874e;
+}
+
+.resident-button {
+  background-color: #1965b7;
+}

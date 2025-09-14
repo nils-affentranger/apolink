@@ -1,0 +1,373 @@
+.orders-container {
+  margin: 20px auto;
+  max-width: 1200px;
+  padding: 0 16px;
+}
+
+.section-box {
+  background-color: #32373d;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-box {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Limit the visual width of the input while staying responsive */
+.search-input-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 520px; /* narrower search bar */
+}
+
+.search-result-box {
+  width: 100%;
+  background: #3a4046;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.search-box input[type='text'] {
+  width: 100%;
+  padding: 10px 36px 10px 12px; /* right padding for clear button */
+  border-radius: 6px;
+  border: 1px solid #6a7179;
+  background-color: #2b3035;
+  color: #fff;
+  font-size: 16px;
+  box-sizing: border-box;
+  display: block;
+}
+
+/* Clear (×) button inside the input */
+.clear-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #bbb;
+  font-size: 18px;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.clear-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.suggestions {
+  position: absolute;
+  left: 50%;
+  right: auto;
+  top: calc(100% + 4px);
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 520px;
+  background: #2b3035;
+  border: 1px solid #6a7179;
+  border-radius: 6px;
+  list-style: none;
+  margin: 6px 0 0 0; /* ensure spacing from input */
+  padding: 6px 0;
+  z-index: 5;
+}
+
+/* Position suggestions relative to the input wrapper for correct width */
+.search-box .suggestions {
+  max-width: 520px;
+}
+
+.suggestions li {
+  padding: 8px 12px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background: #3a4046;
+}
+
+.status-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 22px;
+  color: white;
+  align-items: center;
+  width: 100%;
+  background-color: #535a61;
+  border-radius: 8px;
+}
+
+.status-box span {
+  flex-grow: 1;
+  text-align: center;
+  padding: 5px 0;
+}
+
+.accent {
+  font-weight: bold;
+  margin-right: 2px;
+}
+
+.accent-pending {
+  color: #ffd700;
+}
+
+.accent-completed {
+  color: #39c57b;
+}
+
+.orders-box {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Make orders a responsive grid */
+.orders-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr; /* mobile: single column */
+  gap: 12px;
+}
+
+@media (min-width: 900px) {
+  .orders-box ul {
+    grid-template-columns: 1fr 1fr; /* two columns on wide screens */
+  }
+}
+
+@media (orientation: landscape) and (min-width: 700px) and (max-width: 899px) {
+  .orders-box ul {
+    grid-template-columns: 1fr 1fr; /* two columns on landscape tablets */
+  }
+}
+
+/* Contain order cards and children */
+.orders-box li {
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto; /* was: 1fr auto 64px */
+}
+
+/* Prevent grid children from forcing overflow */
+.orders-box li > * {
+  min-width: 0;
+}
+
+.orders-box li {
+  background-color: #535a61;
+  border-radius: 6px;
+  padding: 8px 12px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto; /* was: 1fr auto 64px */
+  column-gap: 12px;
+  align-items: start;
+  color: white;
+  font-size: 16px;
+  overflow: hidden; /* contain inner padding/child width */
+  min-width: 0; /* allow grid content to shrink */
+}
+
+.order-id {
+  font-weight: bold;
+}
+
+/* Truncate long header fields */
+.order-id,
+.order-status,
+.order-date {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.order-status {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+  justify-self: start;
+}
+
+/* Truncate long header fields */
+.order-status {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.order-status[data-status='pending'] {
+  background: rgba(255, 165, 0, 0.15);
+  color: #ffa500;
+  border: 1px solid rgba(255, 165, 0, 0.35);
+}
+
+.order-status[data-status='completed'] {
+  background: rgba(57, 197, 123, 0.15);
+  color: #39c57b;
+  border: 1px solid rgba(57, 197, 123, 0.35);
+}
+
+.order-date {
+  font-size: 14px;
+  color: #ccc;
+}
+
+/* Truncate long header fields */
+.order-date {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.order-groups {
+  grid-column: 1 / -1;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Make groups and headers respect container width */
+.order-groups {
+  width: 100%;
+  min-width: 0;
+}
+.resident-group {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.resident-header {
+  min-width: 0;
+}
+
+.resident-group {
+  background: #4a5158;
+  border-radius: 6px;
+  padding: 8px;
+  width: 100%;
+}
+
+.resident-header {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.resident-name {
+  font-weight: 600;
+}
+
+/* Truncate long resident name */
+.resident-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.resident-room {
+  font-size: 13px;
+  color: #ddd;
+}
+
+.med-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+/* Subtle dividers between products on the resident view */
+.search-result-box .med-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 6px;
+}
+.search-result-box .med-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Make product rows robustly right-align the qty pill */
+.order-groups {
+  width: 100%;
+}
+.resident-group {
+  width: 100%;
+}
+.med-list {
+  width: 100%;
+}
+
+/* Override previous grid with flex for reliable alignment */
+.med-item {
+  display: flex;
+  align-items: center; /* vertically center contents */
+  gap: 8px;
+  width: 100%;
+}
+
+/* Product row already flex with right-aligned qty; ensure no overflow */
+.med-item {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.med-name {
+  flex: 1 1 auto;
+  min-width: 0; /* allow ellipsis */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Quantity pill aligned right with lighter background */
+.med-qty {
+  flex: 0 0 auto;
+  margin-left: auto; /* push to the far right */
+  padding: 3px 10px; /* slightly larger for resident view emphasis */
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.2;
+  display: inline-flex; /* center pill content */
+  align-items: center;
+  justify-content: center;
+  line-height: 1; /* avoid baseline offset */
+  align-self: center; /* ensure vertical centering in row */
+}

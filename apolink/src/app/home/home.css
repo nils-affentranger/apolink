@@ -1,5 +1,33 @@
 .home-container {
-  padding: 16px;
-  background-color: #f0f0f0;
-  border-radius: 8px;
+  /* Center content and limit line length on wide screens */
+  margin: 20px auto;
+  max-width: 1200px;
+  padding: 0 16px;
+
+  /* Layout */
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile-first: single column */
+  gap: 16px; /* Consistent spacing between sections */
+  align-content: start;
+}
+
+/* On wider or landscape screens, place orders and residents side by side
+   with quick access spanning the full width on top */
+@media (min-width: 900px) {
+  .home-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .home-container app-quick-access {
+    grid-column: 1 / -1; /* Span across both columns */
+  }
+}
+
+/* Support moderate landscape devices */
+@media (orientation: landscape) and (min-width: 700px) and (max-width: 899px) {
+  .home-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .home-container app-quick-access {
+    grid-column: 1 / -1;
+  }
 }

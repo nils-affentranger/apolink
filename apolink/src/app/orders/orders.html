@@ -1,1 +1,102 @@
-<p>orders works!</p>
+<div class="orders-container">
+  <h1>Bestellungen</h1>
+
+  <div class="section-box">
+    <!-- Search / Autocomplete -->
+    <div class="search-box">
+      <div class="search-input-wrap">
+        <input
+          type="text"
+          placeholder="Nach Bewohner filtern..."
+          [value]="search()"
+          (input)="onSearch($any($event.target).value)"
+          (blur)="onInputBlur()"
+          (focus)="onInputFocus()"
+          aria-label="Nach Bewohner filtern"
+        />
+        @if (search().trim().length > 0) {
+        <button
+          class="clear-btn"
+          type="button"
+          (mousedown)="onClearMouseDown($event)"
+          aria-label="Suche löschen"
+        >
+          ×
+        </button>
+        }
+      </div>
+      @if (showSuggestions() && suggestions().length > 0) {
+      <ul class="suggestions">
+        @for (s of suggestions(); track s.id) {
+        <li (mousedown)="onSuggestionMouseDown($event, s.name)">
+          {{ s.name }} · Zimmer {{ s.room }}
+        </li>
+        }
+      </ul>
+      }
+    </div>
+
+    <!-- When searching: show pending items grouped by resident in a box -->
+    @if (pendingItemsForSelectedAggregated().length > 0) {
+    <div class="search-result-box">
+      <div class="status-box">
+        <span>
+          <span class="accent accent-pending">{{
+            pendingItemsForSelectedAggregated().length
+          }}</span>
+          In Bearbeitung
+        </span>
+      </div>
+
+      <div class="resident-group">
+        <div class="resident-header">
+          <span class="resident-name">{{ selectedResident()?.name }}</span>
+          <span class="resident-room">Zimmer {{ selectedResident()?.room }}</span>
+        </div>
+        <ul class="med-list">
+          @for (item of pendingItemsForSelectedAggregated(); track item.productName) {
+          <li class="med-item">
+            <span class="med-name">{{ item.productName }}</span>
+            <span class="med-qty">×{{ item.totalQuantity }}</span>
+          </li>
+          }
+        </ul>
+      </div>
+    </div>
+    } @else {
+    <!-- Default: show all orders when there's no search or no matching resident -->
+    <div class="orders-box">
+      <ul>
+        @for (order of allOrdersSorted(); track order.id) {
+        <li>
+          <span class="order-id">Bestellung #{{ order.id }}</span>
+          <span class="order-status" [attr.data-status]="order.status">
+            {{ order.status === 'pending' ? 'In Bearbeitung' : 'Abgeschlossen' }}
+          </span>
+          <span class="order-date">{{ order.date | date : 'shortDate' }}</span>
+
+          <div class="order-groups">
+            @for (g of groupByResident(order); track g.resident.id) {
+            <div class="resident-group">
+              <div class="resident-header">
+                <span class="resident-name">{{ g.resident.name }}</span>
+                <span class="resident-room">Zimmer {{ g.resident.room }}</span>
+              </div>
+              <ul class="med-list">
+                @for (it of g.items; track it.id) {
+                <li class="med-item">
+                  <span class="med-name">{{ it.productName }}</span>
+                  <span class="med-qty">×{{ it.quantity }}</span>
+                </li>
+                }
+              </ul>
+            </div>
+            }
+          </div>
+        </li>
+        }
+      </ul>
+    </div>
+    }
+  </div>
+</div>

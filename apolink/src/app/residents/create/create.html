@@ -1,0 +1,94 @@
+<div class="create-resident-container">
+  <h1>Bewohner anlegen</h1>
+
+  <div class="section-box">
+    <form (ngSubmit)="save()" #f="ngForm" class="create-form">
+      <div class="form-grid">
+        <!-- Anrede -->
+        <div class="form-field">
+          <label for="anrede">Anrede</label>
+          <select
+            id="anrede"
+            name="anrede"
+            [ngModel]="model().anrede"
+            (ngModelChange)="update('anrede', $event)"
+          >
+            @for (opt of anredeOptions; track opt) {
+            <option [value]="opt">{{ opt }}</option>
+            }
+          </select>
+        </div>
+
+        <!-- Vorname -->
+        <div class="form-field">
+          <label for="vorname">Vorname</label>
+          <input
+            id="vorname"
+            name="vorname"
+            type="text"
+            required
+            [ngModel]="model().vorname"
+            (ngModelChange)="update('vorname', $event)"
+          />
+        </div>
+
+        <!-- Nachname -->
+        <div class="form-field">
+          <label for="nachname">Nachname</label>
+          <input
+            id="nachname"
+            name="nachname"
+            type="text"
+            required
+            [ngModel]="model().nachname"
+            (ngModelChange)="update('nachname', $event)"
+          />
+        </div>
+
+        <!-- Geburtsdatum -->
+        <div class="form-field span-all">
+          <label for="geburtsdatum">Geburtsdatum</label>
+          <input
+            id="geburtsdatum"
+            name="geburtsdatum"
+            type="date"
+            [ngModel]="model().geburtsdatum"
+            (ngModelChange)="update('geburtsdatum', $event)"
+          />
+        </div>
+
+        <!-- AHV-Nummer -->
+        <div class="form-field span-all">
+          <label for="ahvNummer">AHV-Nummer</label>
+          <input
+            id="ahvNummer"
+            name="ahvNummer"
+            type="text"
+            inputmode="numeric"
+            placeholder="756.1234.5678.97"
+            [ngModel]="model().ahvNummer"
+            (ngModelChange)="update('ahvNummer', $event)"
+          />
+        </div>
+
+        <!-- Zimmer -->
+        <div class="form-field span-all">
+          <label for="zimmer">Zimmer</label>
+          <input
+            id="zimmer"
+            name="zimmer"
+            type="text"
+            required
+            [ngModel]="model().zimmer"
+            (ngModelChange)="update('zimmer', $event)"
+          />
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <a routerLink="/bewohner" class="btn-secondary">Abbrechen</a>
+        <button class="btn-primary" type="submit" [disabled]="!canSave">Speichern</button>
+      </div>
+    </form>
+  </div>
+</div>
