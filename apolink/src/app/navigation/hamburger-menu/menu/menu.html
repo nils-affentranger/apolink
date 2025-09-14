@@ -1,0 +1,17 @@
+@if (isOpen()) {
+<div class="sidebar-backdrop" (click)="closeSidebar()"></div>
+}
+<div class="sidebar" [class.open]="isOpen()">
+  <ul>
+    <a routerLink="/" (click)="closeSidebar()">
+      <li><span class="sidebar-icon"></span>Dashboard</li>
+    </a>
+    <span class="separator"></span>
+    <a routerLink="/bestellungen" (click)="closeSidebar()">
+      <li><span class="sidebar-icon"></span>Bestellungen</li>
+    </a>
+    <a routerLink="/bewohner" (click)="closeSidebar()">
+      <li><span class="sidebar-icon"></span>Bewohner</li>
+    </a>
+  </ul>
+</div>

@@ -1,0 +1,85 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100vh;
+  background-color: #32373d;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s ease;
+  z-index: 1000;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 88px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.sidebar li {
+  background-color: #484e55;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 20px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.sidebar li:hover {
+  background-color: #5a6068;
+}
+
+.sidebar-icon {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-color: #9aa3ad;
+  border-radius: 4px;
+  margin: 10px;
+  flex-shrink: 0;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  text-decoration: none;
+  color: #c7cfdb;
+  font-size: 18px;
+  width: 100%;
+  margin-left: 0;
+}
+
+.separator {
+  height: 1.5px;
+  border-radius: 999px;
+  background-color: #808898;
+  margin: 8px 40px;
+}
+
+.sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+.sidebar-backdrop.ng-leave {
+  opacity: 0;
+}

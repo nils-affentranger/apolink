@@ -1,0 +1,27 @@
+#navbar {
+  background-color: #464c55;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1001;
+}
+
+.menu-button {
+  margin-right: 30px;
+}
+
+.brand-logo {
+  height: 55px;
+  aspect-ratio: 1 / 1;
+}
+
+.brand-text {
+  color: #39c57b;
+  font-size: 28px;
+  font-weight: 450;
+  margin-left: 10px;
+}
